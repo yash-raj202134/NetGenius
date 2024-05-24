@@ -2,6 +2,8 @@ from ultralytics import YOLO
 import cv2
 import pickle
 import sys
+from src.netGenius.utils.bbox_utils import get_center_of_bbox, measure_distance
+
 
 
 class PlayerTracker:
@@ -49,6 +51,40 @@ class PlayerTracker:
         
         return player_dict
     
+
+
+    def choose_and_filter_players(self, court_keypoints, player_detections):
+        player_detections_first_frame = player_detections[0]
+        chosen_player = self.choose_players(court_keypoints, player_detections_first_frame)
+        filtered_player_detections = []
+        for player_dict in player_detections:
+            filtered_player_dict = {track_id: bbox for track_id, bbox in player_dict.items() if track_id in chosen_player}
+            filtered_player_detections.append(filtered_player_dict)
+        return filtered_player_detections
+    
+
+    def choose_players(self, court_keypoints, player_dict):
+        distances = []
+        for track_id, bbox in player_dict.items():
+            player_center = get_center_of_bbox(bbox)
+
+            min_distance = float('inf')
+            for i in range(0,len(court_keypoints),2):
+                court_keypoint = (court_keypoints[i], court_keypoints[i+1])
+                distance = measure_distance(player_center, court_keypoint)
+                if distance < min_distance:
+                    min_distance = distance
+            distances.append((track_id, min_distance))
+        
+        # sorrt the distances in ascending order
+        distances.sort(key = lambda x: x[1])
+        # Choose the first 2 tracks
+        chosen_players = [distances[0][0], distances[1][0]]
+        return chosen_players
+    
+
+
+
     def draw_bboxes(self,video_frames,player_detections):
         output_video_frames = []
 
