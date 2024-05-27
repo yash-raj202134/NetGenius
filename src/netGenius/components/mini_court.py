@@ -163,3 +163,14 @@ class MiniCourt():
 
         return output_frames    
 
+    def get_start_point_of_mini_court(self):
+
+        return (self.court_start_x,self.court_start_y)
+    
+    def get_width_of_mini_court(self):
+
+        return self.court_drawing_width
+    
+    def get_court_drawing_keypoints(self):
+        
+        return self.drawing_key_points

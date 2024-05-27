@@ -17,3 +17,12 @@ def save_video(output_video_frames, output_video_path):
     for frame in output_video_frames:
         out.write(frame)
     out.release()
+
+
+def draw_frame_number(output_video_frames):
+    ## Draw frame number on top left corner
+    for i, frame in enumerate(output_video_frames):
+        cv2.putText(frame, f"Frame: {i}",(10,30),cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+
+    return output_video_frames
+        

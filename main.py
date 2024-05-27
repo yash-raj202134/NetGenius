@@ -1,5 +1,5 @@
 
-from src.netGenius.utils.video_utils import (read_video,save_video)
+from src.netGenius.utils.video_utils import (read_video,save_video,draw_frame_number)
 from src.netGenius.components.player_tracker import PlayerTracker
 from src.netGenius.components.ball_tracker import BallTracker
 from src.netGenius.components.court_line_detector import CourtLineDetector
@@ -46,7 +46,11 @@ def main():
     ## Draw mini court
     output_video_frames = mini_court.draw_mini_court(output_video_frames)
 
+    # Draw frame number on top left corner
+    output_video_frames = draw_frame_number(output_video_frames)
 
+
+    
     save_video(output_video_frames, "output/output_video.avi")
 
 
