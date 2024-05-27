@@ -33,6 +33,11 @@ def main():
     # Minicourt
     mini_court = MiniCourt(video_frames[0])
 
+    # Detect ball shots
+    ball_shot_frames = ball_tracker.get_ball_shot_frames(ball_detections)
+    print(ball_shot_frames)
+
+
     # Draw output
 
 
@@ -50,7 +55,7 @@ def main():
     output_video_frames = draw_frame_number(output_video_frames)
 
 
-    
+
     save_video(output_video_frames, "output/output_video.avi")
 
 
