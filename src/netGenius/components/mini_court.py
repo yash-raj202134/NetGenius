@@ -10,7 +10,7 @@ class MiniCourt():
     def __init__(self,frame) -> None:
         self.drawing_rectangle_width = 250
         self.drawing_rectangle_height = 530
-        self.buffer = 60
+        self.buffer = 50
         self.padding_court = 20
 
         self.set_canvas_bg_box_pos(frame)
