@@ -3,6 +3,7 @@ from src.netGenius.utils.video_utils import (read_video,save_video)
 from src.netGenius.components.player_tracker import PlayerTracker
 from src.netGenius.components.ball_tracker import BallTracker
 from src.netGenius.components.court_line_detector import CourtLineDetector
+from src.netGenius.components.mini_court import MiniCourt
 
 
 
@@ -29,6 +30,9 @@ def main():
     # Choose players
     player_detections = player_tracker.choose_and_filter_players(court_keypoints,player_detections)
 
+    # Minicourt
+    mini_court = MiniCourt(video_frames[0])
+
     # Draw output
 
 
@@ -38,6 +42,9 @@ def main():
 
     ## Draw court keypoints:
     output_video_frames = court_line_detector.draw_keypoints_on_video(output_video_frames,court_keypoints)
+
+    ## Draw mini court
+    output_video_frames = mini_court.draw_mini_court(output_video_frames)
 
 
     save_video(output_video_frames, "output/output_video.avi")

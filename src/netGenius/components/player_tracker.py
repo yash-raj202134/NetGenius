@@ -97,4 +97,3 @@ class PlayerTracker:
             output_video_frames.append(frame)
         
         return output_video_frames
-
