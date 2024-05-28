@@ -71,7 +71,7 @@ def main():
     output_video_frames = draw_frame_number(output_video_frames)
 
 
-
+    # saving the video output
     save_video(output_video_frames, "output/output_video.avi")
 
 
