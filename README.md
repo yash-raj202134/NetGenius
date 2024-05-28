@@ -35,3 +35,23 @@ The project is organized into several stages:
    ```bash
    git clone https://github.com/yash-raj202134/NetGenius.git
    cd NetGenius
+   ```
+
+2. Activate env:
+   ```bash
+   conda activate tennisCV
+   ```
+
+3. run the main script:
+   ```bash
+   python main.py
+   ```
+
+
+## Requirements
+To execute this project, you must have the following dependencies installed:
+- Ultralytics
+- roboflow
+
+(see requirements.txt)
+
