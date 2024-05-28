@@ -5,10 +5,10 @@ AI-Powered Tennis Match Analysis system with YOLO, PyTorch, and Key Point Extrac
 NetGenius is an advanced AI-powered system designed to analyze tennis matches by detecting and tracking players and the tennis ball in videos. It utilizes state-of-the-art machine learning techniques, including YOLO for object detection and CNNs for court keypoint extraction, to provide comprehensive insights into player performance.
 
 <!-- screenshot -->
-# Input video
+### Input video
 ![Input screenshot](screenshot/input.png)
 
-# Output video
+### Output video
 ![output screenshot](screenshot/output.png)
 
 ## Features
