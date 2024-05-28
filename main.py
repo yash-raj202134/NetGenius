@@ -4,8 +4,8 @@ from src.netGenius.components.player_tracker import PlayerTracker
 from src.netGenius.components.ball_tracker import BallTracker
 from src.netGenius.components.court_line_detector import CourtLineDetector
 from src.netGenius.components.mini_court import MiniCourt
-
-
+from src.netGenius.components.players_stats import calculate_stats
+from src.netGenius.utils.player_stats_drawer import draw_player_stats
 
 def main():
     # Read the input video
@@ -35,12 +35,18 @@ def main():
 
     # Detect ball shots
     ball_shot_frames = ball_tracker.get_ball_shot_frames(ball_detections)
-    print(ball_shot_frames)
 
     # convert positions to mini court positions
     player_mini_court_detections, ball_mini_court_detections = mini_court.convert_bounding_boxes_to_mini_court_coordinates(
         player_detections,ball_detections,court_keypoints
     )
+
+
+    player_stats_data_df = calculate_stats(video_frames,mini_court,
+                                           ball_shot_frames,ball_mini_court_detections,
+                                           player_mini_court_detections)
+    
+
 
 
     # Draw output
@@ -57,6 +63,9 @@ def main():
     output_video_frames = mini_court.draw_mini_court(output_video_frames)
     output_video_frames = mini_court.draw_points_on_mini_court(output_video_frames,player_mini_court_detections)
     output_video_frames = mini_court.draw_points_on_mini_court(output_video_frames,ball_mini_court_detections,color=(0,255,255))
+
+    # Draw Player Stats
+    output_video_frames = draw_player_stats(output_video_frames,player_stats_data_df)
 
     # Draw frame number on top left corner
     output_video_frames = draw_frame_number(output_video_frames)
