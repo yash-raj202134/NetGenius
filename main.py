@@ -78,6 +78,7 @@ def main():
 
 from src.netGenius.pipeline.stage_01_input import Inputpipeline
 from src.netGenius.pipeline.stage_02_player_and_ball_detections import Player_and_Ball_detection_pipeline
+from netGenius.pipeline.stage_03_courtline import Courtline_Detector_pipeline
 
 if __name__ =="__main__":
 
@@ -88,14 +89,24 @@ if __name__ =="__main__":
 
     # stage 02 : player and ball detections
     player_and_ball_detections = Player_and_Ball_detection_pipeline(video_frames)
-    player_detections = player_and_ball_detections.runTracker(
+    player_detection , ball_detection, player_tracker, ball_tracker = player_and_ball_detections.runTracker(
         player_model_path='models/yolov8x',
         ball_model_path='models/last.pt',
         player_stub_path='stubs/tracker_stubs/player_detections.pkl',
         ball_stub_path='stubs/tracker_stubs/ball_detections.pkl'
         )
     
+    # stage 03 : Courtline 
+    courtline_detection = Courtline_Detector_pipeline(video_frames)
+    court_keypoints, player_detection = courtline_detection.run(
+        court_model_path = 'models/keypoints_model.pth', 
+        player_tracker = player_tracker,
+        player_detections = player_detection
+        )
     
+
+
+
 
 
     
