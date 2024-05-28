@@ -80,6 +80,8 @@ from src.netGenius.pipeline.stage_01_input import Inputpipeline
 from src.netGenius.pipeline.stage_02_player_and_ball_detections import Player_and_Ball_detection_pipeline
 from src.netGenius.pipeline.stage_03_courtline import Courtline_Detector_pipeline
 from src.netGenius.pipeline.stage_04_minicourt import Minicourt_building_pipeline
+from src.netGenius.pipeline.stage_05_player_stats_calculator import Player_stats_pipeline
+
 from src.netGenius import logger
 
 if __name__ =="__main__":
@@ -114,10 +116,22 @@ if __name__ =="__main__":
         ball_detections=ball_detection,
         court_keypoints=court_keypoints,
     )
-    
+
+    # stage 05 : Player stats calculations
+    playerstats = Player_stats_pipeline(video_frames)
+    player_stats_dataframe = playerstats.run(
+        mini_court=mini_court,
+        ball_tracker=ball_tracker,
+        ball_detections=ball_detection,
+        ball_mini_court_detections=ball_mini_court_detections,
+        player_mini_court_detections=player_mini_court_detections
+    )
 
 
-    
+
+
+
+
 
     # testing the output:
     try:
@@ -139,6 +153,8 @@ if __name__ =="__main__":
             ball_mini_court_detections,
             color=(0,255,255)
         )
+        # Draw Player Stats
+        output_video_frames = draw_player_stats(output_video_frames,player_stats_dataframe)
 
         # saving the video output
         save_video(output_video_frames, "testing/output_video.avi")
