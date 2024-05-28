@@ -1,7 +1,7 @@
-import torch
-import torchvision.transforms as transforms
-import cv2
-from torchvision import models
+import torch # type: ignore
+import torchvision.transforms as transforms # type: ignore
+import cv2 # type: ignore
+from torchvision import models # type: ignore
 import numpy as np
 
 

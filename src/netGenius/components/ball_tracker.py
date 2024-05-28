@@ -1,8 +1,8 @@
-from ultralytics import YOLO 
-import cv2
+from ultralytics import YOLO # type: ignore
+import cv2 # type: ignore
 import pickle
 import sys
-import pandas as pd 
+import pandas as pd  # type: ignore
 
 class BallTracker:
     def __init__(self,model_path):

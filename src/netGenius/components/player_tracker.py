@@ -1,5 +1,5 @@
-from ultralytics import YOLO 
-import cv2
+from ultralytics import YOLO  # type: ignore
+import cv2 # type: ignore
 import pickle
 import sys
 from src.netGenius.utils.bbox_utils import get_center_of_bbox, measure_distance
