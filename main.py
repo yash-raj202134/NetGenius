@@ -76,8 +76,14 @@ def main():
 
 
 
+from src.netGenius.pipeline.stage_01_input import Inputpipeline
 
 if __name__ =="__main__":
 
-    main()
+    # main()
+    inp = Inputpipeline("input_video/input_video.mp4")
+    video_frames = inp.run()
+
+
+
 
