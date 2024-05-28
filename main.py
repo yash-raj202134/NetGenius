@@ -78,7 +78,8 @@ def main():
 
 from src.netGenius.pipeline.stage_01_input import Inputpipeline
 from src.netGenius.pipeline.stage_02_player_and_ball_detections import Player_and_Ball_detection_pipeline
-from netGenius.pipeline.stage_03_courtline import Courtline_Detector_pipeline
+from src.netGenius.pipeline.stage_03_courtline import Courtline_Detector_pipeline
+from src.netGenius import logger
 
 if __name__ =="__main__":
 
@@ -96,14 +97,33 @@ if __name__ =="__main__":
         ball_stub_path='stubs/tracker_stubs/ball_detections.pkl'
         )
     
+    
     # stage 03 : Courtline 
-    courtline_detection = Courtline_Detector_pipeline(video_frames)
-    court_keypoints, player_detection = courtline_detection.run(
+    courtline = Courtline_Detector_pipeline(video_frames)
+    court_line_detector,court_keypoints, player_detection = courtline.run(
         court_model_path = 'models/keypoints_model.pth', 
         player_tracker = player_tracker,
         player_detections = player_detection
         )
     
+
+
+    # testing the output:
+    try:
+        logger.info('drawing the output:')
+        output_video_frames = player_tracker.draw_bboxes(video_frames,player_detection)
+        output_video_frames = ball_tracker.draw_bboxes(output_video_frames,ball_detection)
+
+        ## Draw court keypoints:
+        output_video_frames = court_line_detector.draw_keypoints_on_video(output_video_frames,court_keypoints)
+        # saving the video output
+        save_video(output_video_frames, "testing/output_video.avi")
+        logger.info('output generated')
+    except Exception as e:
+        logger.exception(e)
+        raise e
+    
+
 
 
 

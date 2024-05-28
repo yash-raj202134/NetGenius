@@ -25,7 +25,7 @@ class Courtline_Detector_pipeline():
         player_detections = player_tracker.choose_and_filter_players(court_keypoints,player_detections)
         logger.info('sucessfully filtered players')
 
-        return court_keypoints , player_detections
+        return court_line_detector, court_keypoints , player_detections
 
 
 
