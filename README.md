@@ -29,6 +29,19 @@ The project is organized into several stages:
 5. **Player Stats Calculation**: Computes various player and ball statistics.
 6. **Output Drawing**: Annotates the video with detected objects and statistics.
 
+## Dataset used for training the model
+This project uses the following dataset:
+
+**tennis ball detection Dataset**
+
+- **Author:** Viren Dhanwani
+- **Type:** Open Source Dataset
+- **Published On:** Roboflow Universe
+- **Publisher:** Roboflow
+- **Year:** 2023
+- **Month:** February
+- **URL:** [https://universe.roboflow.com/viren-dhanwani/tennis-ball-detection](https://universe.roboflow.com/viren-dhanwani/tennis-ball-detection)
+- **Note:** Visited on 2024-05-28 
 ## Installation
 
 1. Clone the repository:
@@ -54,4 +67,7 @@ To execute this project, you must have the following dependencies installed:
 - roboflow
 
 (see requirements.txt)
+
+## License
+This project is licensed under the MIT License. See the LICENSE file for more details.
 
