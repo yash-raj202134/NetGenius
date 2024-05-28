@@ -26,5 +26,5 @@ The project is organized into several stages:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/NetGenius.git
+   git clone https://github.com/yash-raj202134/NetGenius.git
    cd NetGenius
