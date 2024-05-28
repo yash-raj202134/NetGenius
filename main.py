@@ -79,12 +79,13 @@ def main():
 from src.netGenius.pipeline.stage_01_input import Inputpipeline
 from src.netGenius.pipeline.stage_02_player_and_ball_detections import Player_and_Ball_detection_pipeline
 from src.netGenius.pipeline.stage_03_courtline import Courtline_Detector_pipeline
+from src.netGenius.pipeline.stage_04_minicourt import Minicourt_building_pipeline
 from src.netGenius import logger
 
 if __name__ =="__main__":
 
     # main()
-    # stage 01 input:
+    # stage 01 : Input
     inp = Inputpipeline("input_video/input_video.mp4")
     video_frames = inp.run()
 
@@ -104,9 +105,19 @@ if __name__ =="__main__":
         court_model_path = 'models/keypoints_model.pth', 
         player_tracker = player_tracker,
         player_detections = player_detection
-        )
+    )
+    
+    # stage 04 : Minicourt
+    minicourt = Minicourt_building_pipeline(video_frames)
+    mini_court, player_mini_court_detections, ball_mini_court_detections = minicourt.run(
+        player_detections=player_detection,
+        ball_detections=ball_detection,
+        court_keypoints=court_keypoints,
+    )
     
 
+
+    
 
     # testing the output:
     try:
@@ -116,6 +127,19 @@ if __name__ =="__main__":
 
         ## Draw court keypoints:
         output_video_frames = court_line_detector.draw_keypoints_on_video(output_video_frames,court_keypoints)
+
+        ## Draw mini court
+        output_video_frames = mini_court.draw_mini_court(output_video_frames)
+        output_video_frames = mini_court.draw_points_on_mini_court(
+            output_video_frames,
+            player_mini_court_detections
+        )
+        output_video_frames = mini_court.draw_points_on_mini_court(
+            output_video_frames,
+            ball_mini_court_detections,
+            color=(0,255,255)
+        )
+
         # saving the video output
         save_video(output_video_frames, "testing/output_video.avi")
         logger.info('output generated')
