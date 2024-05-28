@@ -77,12 +77,28 @@ def main():
 
 
 from src.netGenius.pipeline.stage_01_input import Inputpipeline
+from src.netGenius.pipeline.stage_02_player_and_ball_detections import Player_and_Ball_detection_pipeline
 
 if __name__ =="__main__":
 
     # main()
+    # stage 01 input:
     inp = Inputpipeline("input_video/input_video.mp4")
     video_frames = inp.run()
+
+    # stage 02 : player and ball detections
+    player_and_ball_detections = Player_and_Ball_detection_pipeline(video_frames)
+    player_detections = player_and_ball_detections.runTracker(
+        player_model_path='models/yolov8x',
+        ball_model_path='models/last.pt',
+        player_stub_path='stubs/tracker_stubs/player_detections.pkl',
+        ball_stub_path='stubs/tracker_stubs/ball_detections.pkl'
+        )
+    
+    
+
+
+    
 
 
 
