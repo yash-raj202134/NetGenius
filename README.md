@@ -70,4 +70,6 @@ To execute this project, you must have the following dependencies installed:
 
 ## License
 This project is licensed under the GNU License. See the LICENSE file for more details.
-
+## Author 
+Feel free to contact :
+- Email : [yashraj3376@gmail.com]
